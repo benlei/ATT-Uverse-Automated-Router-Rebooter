@@ -1,5 +1,5 @@
 /* Fill in the access code and your router IP below */
-var routerAccessCode = "put_your_router_access_code_here";
+var routerAccessCode = process.argv[2];
 var routerIP = "192.168.1.254";
 /****************************************************/
 
@@ -43,7 +43,9 @@ function RebootRouter() {
 }
 
 function doRestart(cookieJar, nonce){
-
+    // RESET_BB = broadband
+    // RESET_IP = ip
+    // RESTART = system
     var form = {
         "RESET_BB" : 'Reset',
         "THISPAGE" : 'A_0_0',
