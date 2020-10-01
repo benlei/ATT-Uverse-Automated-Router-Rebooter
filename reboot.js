@@ -42,6 +42,40 @@ function RebootRouter() {
     });
 }
 
+function LoginRouter(counter) {
+
+    var form = {
+        "ADM_PASSWORD" : routerAccessCode,
+        "NEXTPAGE" : 'A_0_0'
+    };
+
+    var formData = querystring.stringify(form);
+    var contentLength = formData.length;
+    var cookieJar = request.jar();
+    request({
+
+        headers: {
+            'Content-Length': contentLength,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        uri: 'http://' + routerIP + '/xslt?PAGE=login_post',
+        jar: cookieJar,
+        body: formData,
+        method: 'POST'
+    }, function (err, res, body) {
+
+        if (body===undefined) {
+            console.log('Did not detect your gateway, please make sure you have specified your router access code + router IP using routerIP on lines 3 & 4 inside reboot.js')
+            return;
+        }
+
+        if (counter < 5) LoginRouter(counter + 1);
+
+    });
+}
+
+
+
 function doRestart(cookieJar, nonce){
     // RESET_BB = broadband
     // RESET_IP = ip
@@ -73,6 +107,8 @@ function doRestart(cookieJar, nonce){
         }
 
         console.log('Router Rebooting.');
+
+        LoginRouter(0);
 
     });
 
