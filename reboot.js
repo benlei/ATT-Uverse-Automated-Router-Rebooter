@@ -66,10 +66,10 @@ function LoginRouter(counter) {
 
         if (body===undefined) {
             console.log('Did not detect your gateway, please make sure you have specified your router access code + router IP using routerIP on lines 3 & 4 inside reboot.js')
-            return;
+            //return;
         }
 
-        if (counter < 5) LoginRouter(counter + 1);
+        if (counter < 180) LoginRouter(counter + 1);
 
     });
 }
