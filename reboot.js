@@ -85,8 +85,8 @@ function doRestart(cookieJar, nonce){
     var form = {
         "NONCE": nonce,
         "THISPAGE": 'C_5_7',
-        //"RESTART": 'Reset',
-        "RESET_BB": 'Reset',
+        "RESTART": 'Reset',
+        //"RESET_BB": 'Reset',
         "BB_TYPE": "DHCP",
         "WIFI0_EXIST": "TRUE",
         //"NEXTPAGE" : 'A_0_0_POST',
