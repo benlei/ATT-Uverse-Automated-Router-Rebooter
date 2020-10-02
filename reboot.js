@@ -64,12 +64,12 @@ function LoginRouter(counter) {
         method: 'POST'
     }, function (err, res, body) {
 
-        if (body===undefined) {
-            console.log('Did not detect your gateway, please make sure you have specified your router access code + router IP using routerIP on lines 3 & 4 inside reboot.js')
+        //if (body===undefined) {
+            //console.log('Did not detect your gateway, please make sure you have specified your router access code + router IP using routerIP on lines 3 & 4 inside reboot.js')
             //return;
-        }
+        //}
 
-        if (counter < 180) LoginRouter(counter + 1);
+        if (counter < 30) LoginRouter(counter + 1);
 
     });
 }
@@ -77,15 +77,20 @@ function LoginRouter(counter) {
 
 
 function doRestart(cookieJar, nonce){
+    //console.log('nonce is:', nonce);
+
     // RESET_BB = broadband
     // RESET_IP = ip
     // RESTART = system
     var form = {
-        "RESET_BB" : 'Reset',
-        "THISPAGE" : 'A_0_0',
-        "NEXTPAGE" : 'A_0_0_POST',
         "NONCE": nonce,
-        "CMSKICK": ""
+        "THISPAGE": 'C_5_7',
+        //"RESTART": 'Reset',
+        "RESET_BB": 'Reset',
+        "BB_TYPE": "DHCP",
+        "WIFI0_EXIST": "TRUE",
+        //"NEXTPAGE" : 'A_0_0_POST',
+        //"CMSKICK": ""
     };
     var formData = querystring.stringify(form);
     var contentLength = formData.length;
@@ -95,7 +100,7 @@ function doRestart(cookieJar, nonce){
             'Content-Length': contentLength,
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        uri: 'http://' + routerIP + '/xslt?PAGE=A_0_0_POST&NEXTPAGE=A_0_0_POST',
+        uri: 'http://' + routerIP + '/xslt?PAGE=C_5_7_POST&NEXTPAGE=C_5_7_POST',
         jar: cookieJar,
         body: formData,
         method: 'POST'
@@ -108,7 +113,7 @@ function doRestart(cookieJar, nonce){
 
         console.log('Router Rebooting.');
 
-        LoginRouter(0);
+        //LoginRouter(0);
 
     });
 
