@@ -29,7 +29,7 @@ function RebootRouter() {
     }, function (err, res, body) {
 
         if (body===undefined) {
-            console.log('Did not detect your gateway, please make sure you have specified your router access code + router IP using routerIP on lines 3 & 4 inside reboot.js')
+            console.log(new Date(), 'Did not detect your gateway, please make sure you have specified your router access code + router IP using routerIP on lines 3 & 4 inside reboot.js')
             return;
         }
 
@@ -107,11 +107,11 @@ function doRestart(cookieJar, nonce){
     }, function (err, res, body) {
 
         if (err) {
-            console.log('Failed Reboot.');
+            console.log(new Date(), 'Failed Reboot.');
             return;
         }
 
-        console.log('Router Rebooting.');
+        console.log(new Date(), 'Router Rebooting.');
 
         //LoginRouter(0);
 
